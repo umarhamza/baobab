@@ -108,3 +108,36 @@ async function gsrun(cl) {
 }
 
 ```
+
+# JUNK
+
+```
+export async function getServerSideProps({ query }) {
+  const { id } = query;
+  const rowNumber = parseInt(id) + 1;
+
+  const auth = await google.auth.getClient({
+    credentials: {
+      client_email: process.env.client_email,
+      private_key: process.env.private_key,
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const range = `Data!A${rowNumber}:C${rowNumber}`;
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.sheet_id_1,
+    range,
+  });
+
+  return {
+    props: {
+      data: response.data.values,
+    },
+  };
+}
+
+```

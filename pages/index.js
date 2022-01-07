@@ -1,57 +1,38 @@
 import { useEffect, useState } from 'react';
-import { google } from 'googleapis';
 import List from '../components/List';
 import Search from '../components/Search';
 import Layout from '../components/Layout';
-import { mapTranslations } from '../utils/helpers';
+import useContextState from '../context/UseStateContext';
+import getData from '../utils/getData';
 
-export async function getServerSideProps() {
-  const auth = await google.auth.getClient({
-    credentials: {
-      client_email: process.env.client_email,
-      private_key: process.env.private_key,
-    },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
-
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  const range = `Data!A2:C2000`;
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.sheet_id_1,
-    range,
-  });
-
-  return {
-    props: {
-      data: response.data.values,
-    },
-  };
-}
-
-export default function Home({ data }) {
-  const [languages, setLanguages] = useState([]);
+export default function Home() {
   const [filteredData, setFilteredData] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [state, setState] = useContextState();
+  const { languages } = state;
 
   useEffect(() => {
-    const languageArray = mapTranslations(data);
-    setLanguages(languageArray);
-  }, [data]);
+    getData().then((languageArray) => {
+      setFilteredData(languageArray);
+
+      setState((prevState) => ({
+        ...prevState,
+        languages: languageArray,
+      }));
+    });
+  }, [setState]);
 
   useEffect(() => {
-    setFilteredData(languages);
-  }, [languages]);
+    if (languages) {
+      const newData = languages.filter((row) => {
+        return row.english.toLowerCase().includes(searchTerm.toLowerCase());
+      });
 
-  useEffect(() => {
-    const newData = languages.filter((row) =>
-      row.english.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredData(newData);
+      setFilteredData(newData);
 
-    if (searchTerm.trim() === '') {
-      setSearchTerm('');
+      if (searchTerm.trim() === '') {
+        setSearchTerm('');
+      }
     }
   }, [searchTerm, languages]);
 
