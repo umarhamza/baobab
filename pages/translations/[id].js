@@ -4,12 +4,14 @@ import Card from '../../components/Card';
 import useContextState from '../../context/UseStateContext';
 import { useRouter } from 'next/router';
 import getData from '../../utils/getData';
+import { Spinner } from '../../components/Spinner';
 
 export default function Translations() {
   const [state, setState] = useContextState();
   const router = useRouter();
   const { id } = router.query;
   const { language } = state;
+  const wolof = language ? wolof : 'Baobab';
 
   useEffect(() => {
     id &&
@@ -33,14 +35,12 @@ export default function Translations() {
 
   return (
     <Fragment>
-      {language && (
-        <Layout pageTitle={language.wolof} seoTitle={language.wolof}>
-          <div className='mt-10'>
-            <h4 className='mb-6 text-3xl font-bold'>Translation</h4>
-            {cardList}
-          </div>
-        </Layout>
-      )}
+      <Layout pageTitle={wolof} seoTitle={wolof}>
+        <div className='mt-10'>
+          <h4 className='mb-6 text-3xl font-bold'>Translation</h4>
+          {language ? cardList : <Spinner />}
+        </div>
+      </Layout>
     </Fragment>
   );
 }

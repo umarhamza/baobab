@@ -4,6 +4,7 @@ import Search from '../components/Search';
 import Layout from '../components/Layout';
 import useContextState from '../context/UseStateContext';
 import getData from '../utils/getData';
+import { Spinner } from '../components/Spinner';
 
 export default function Home() {
   const [filteredData, setFilteredData] = useState(null);
@@ -38,7 +39,7 @@ export default function Home() {
 
   return (
     <Layout showBackButton={false}>
-      {filteredData && <List list={filteredData} />}
+      {filteredData ? <List list={filteredData} /> : <Spinner />}
       <Search
         className='bottom-0'
         onChange={({ target: { value } }) => setSearchTerm(value)}

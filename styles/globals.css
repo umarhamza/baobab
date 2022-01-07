@@ -18,3 +18,23 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.spinner-border {
+    vertical-align: -0.125em;
+    border: 0.25em solid;
+    border-right-color: transparent;
+}
+
+.visually-hidden {
+  visibility: hidden
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
