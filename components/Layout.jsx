@@ -19,7 +19,7 @@ const Layout = ({ children, seoTitle, pageTitle, showBackButton }) => {
         className={`min-h-full flex-1 flex flex-col justify-center items-center`}
       >
         <div
-          style={{ height: '592px' }}
+          style={{ height: '100vh' }}
           className='p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700'
         >
           <Title title={pageTitle} showBack={showBackButton} />

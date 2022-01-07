@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
   const auth = await setAuth();
 
-  const range = `Data!E2`;
+  const range = `Data!A2`;
 
   sheets = google.sheets({ version: 'v4', auth });
 

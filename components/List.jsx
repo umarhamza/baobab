@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Buttons from './Buttons';
 import Link from 'next/link';
 import getPageIndex from '../utils/getPageIndex';
+import { v4 as uuid } from 'uuid';
 
 const List = ({ list, originalList }) => {
   return (
@@ -17,7 +18,7 @@ const List = ({ list, originalList }) => {
             const linkIdx = getPageIndex(item, originalList);
             return (
               <li
-                key={index}
+                key={uuid()}
                 className='py-3 sm:py-4 cursor-pointer hover:bg-gray-100 px-8'
               >
                 <Link

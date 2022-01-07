@@ -50,14 +50,26 @@ const Add = () => {
 
     const newLanguages = [...localData, [english, wolof, arabic]];
 
-    setState((prevState) => ({
-      ...prevState,
-      languages: newLanguages,
-    }));
+    localStorage.setItem('baobabData', JSON.stringify(newLanguages));
 
-    axios
-      .post('/api/postGoogleAPI', newLanguages)
-      .then(() => setFormData(initialFormData));
+    axios.post('/api/postGoogleAPI', newLanguages).then(() => {
+      setFormData(initialFormData);
+      setState((prevState) => ({
+        ...prevState,
+        languages: newLanguages,
+        alert: {
+          msg: 'New translation saved.',
+          type: 'success',
+        },
+      }));
+
+      setTimeout(() => {
+        setState((prevState) => ({
+          ...prevState,
+          alert: null,
+        }));
+      }, 5000);
+    });
   };
 
   const handleChange = ({ target: { value, id } }) => {

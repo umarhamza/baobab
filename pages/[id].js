@@ -5,6 +5,7 @@ import useContextState from '../context/UseStateContext';
 import { useRouter } from 'next/router';
 import getData from '../utils/getData';
 import { Spinner } from '../components/Spinner';
+import { v4 as uuid } from 'uuid';
 
 export default function Translations() {
   const [state, setState] = useContextState();
@@ -19,7 +20,7 @@ export default function Translations() {
         if (languageArray) {
           setState((prevState) => ({
             ...prevState,
-            language: languageArray[id],
+            language: languageArray[id - 1],
             alert: null,
             loading: false,
           }));
@@ -41,9 +42,7 @@ export default function Translations() {
   language &&
     Object.keys(language).forEach(function (lang) {
       const translation = language[lang];
-      cardList.push(
-        <Card key={translation} card={translation} prefix={lang} />
-      );
+      cardList.push(<Card key={uuid()} card={translation} prefix={lang} />);
     });
 
   return (

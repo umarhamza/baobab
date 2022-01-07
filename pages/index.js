@@ -39,7 +39,8 @@ export default function Home() {
   useEffect(() => {
     if (languages) {
       const newData = languages.filter((row) => {
-        return row.english.toLowerCase().includes(searchTerm.toLowerCase());
+        const english = row.english ? row.english : '';
+        return english.toLowerCase().includes(searchTerm.toLowerCase());
       });
 
       setFilteredData(newData);
