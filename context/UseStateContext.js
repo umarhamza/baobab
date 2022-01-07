@@ -5,6 +5,8 @@ export const ContextProvider = ({ children }) => {
   const [state, setState] = useState({
     languages: null,
     language: null,
+    loading: false,
+    alert: null,
   });
 
   return (

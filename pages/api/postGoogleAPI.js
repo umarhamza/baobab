@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   sheets = google.sheets({ version: 'v4', auth });
 
   const updateOpt = {
-    spreadsheetId: process.env.SHEET_ID_1,
+    spreadsheetId: process.env.sheet_id_1,
     range: range,
     valueInputOption: 'USER_ENTERED',
     resource: {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     },
   };
 
-  let updateRes = await gsapi.spreadsheets.values.update(updateOpt);
+  let updateRes = await sheets.spreadsheets.values.update(updateOpt);
 
   res.status(200).json({
     data: updateRes,

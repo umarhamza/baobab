@@ -13,12 +13,12 @@ const getData = async () => {
       if (res.status === 200) console.log(res.status);
 
       const data = res.data.data;
-      console.log('axios');
       localStorage.setItem('baobabData', JSON.stringify(data));
 
       return mapTranslations(data);
     } catch (error) {
       console.error(error);
+      return null;
     }
   }
 };

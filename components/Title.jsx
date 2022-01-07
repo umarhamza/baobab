@@ -9,18 +9,16 @@ const Title = ({ title, showBack }) => {
         {title}
       </h3>
       {showBack ? (
-        <Link
-          href='/'
-          className='text-sm font-medium text-blue-600 hover:underline dark:text-blue-500'
-        >
-          Back
+        <Link href='/' passHref>
+          <span className='text-sm font-medium text-gray-900 hover:underline dark:text-gray-100'>
+            Back
+          </span>
         </Link>
       ) : (
-        <Link
-          href='/add'
-          className='text-sm font-medium text-blue-600 hover:underline dark:text-blue-500'
-        >
-          + Add
+        <Link href='/add' passHref>
+          <span className='text-sm font-medium text-gray-900 hover:underline dark:text-gray-100'>
+            + Add
+          </span>
         </Link>
       )}
     </div>

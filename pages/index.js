@@ -14,12 +14,25 @@ export default function Home() {
 
   useEffect(() => {
     getData().then((languageArray) => {
-      setFilteredData(languageArray);
+      if (languageArray) {
+        setFilteredData(languageArray);
 
-      setState((prevState) => ({
-        ...prevState,
-        languages: languageArray,
-      }));
+        setState((prevState) => ({
+          ...prevState,
+          languages: languageArray,
+          alert: null,
+          loading: false,
+        }));
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          loading: false,
+          alert: {
+            msg: 'There was an error loading translations.',
+            type: 'error',
+          },
+        }));
+      }
     });
   }, [setState]);
 
@@ -39,7 +52,11 @@ export default function Home() {
 
   return (
     <Layout showBackButton={false}>
-      {filteredData ? <List list={filteredData} /> : <Spinner />}
+      {filteredData ? (
+        <List list={filteredData} originalList={languages} />
+      ) : (
+        <Spinner />
+      )}
       <Search
         className='bottom-0'
         onChange={({ target: { value } }) => setSearchTerm(value)}

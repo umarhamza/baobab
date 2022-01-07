@@ -16,10 +16,23 @@ export default function Translations() {
   useEffect(() => {
     id &&
       getData().then((languageArray) => {
-        setState((prevState) => ({
-          ...prevState,
-          language: languageArray[id],
-        }));
+        if (languageArray) {
+          setState((prevState) => ({
+            ...prevState,
+            language: languageArray[id],
+            alert: null,
+            loading: false,
+          }));
+        } else {
+          setState((prevState) => ({
+            ...prevState,
+            loading: false,
+            alert: {
+              msg: 'There was an error loading translations.',
+              type: 'error',
+            },
+          }));
+        }
       });
   }, [id, setState]);
 
@@ -37,7 +50,9 @@ export default function Translations() {
     <Fragment>
       <Layout pageTitle={wolof} seoTitle={wolof}>
         <div className='mt-10'>
-          <h4 className='mb-6 text-3xl font-bold'>Translation</h4>
+          <h4 className='mb-6 text-3xl font-bold dark:text-gray-50'>
+            Translation
+          </h4>
           {language ? cardList : <Spinner />}
         </div>
       </Layout>
