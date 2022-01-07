@@ -8,7 +8,7 @@ const getData = async () => {
     return mapTranslations(baobabData);
   } else {
     try {
-      const res = await axios.get('/api/googleAPI');
+      const res = await axios.get('/api/getGoogleAPI');
 
       if (res.status === 200) console.log(res.status);
 

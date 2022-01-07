@@ -1,10 +1,10 @@
 import { Fragment, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import Card from '../../components/Card';
-import useContextState from '../../context/UseStateContext';
+import Layout from '../components/Layout';
+import Card from '../components/Card';
+import useContextState from '../context/UseStateContext';
 import { useRouter } from 'next/router';
-import getData from '../../utils/getData';
-import { Spinner } from '../../components/Spinner';
+import getData from '../utils/getData';
+import { Spinner } from '../components/Spinner';
 
 export default function Translations() {
   const [state, setState] = useContextState();
@@ -21,7 +21,7 @@ export default function Translations() {
           language: languageArray[id],
         }));
       });
-  }, [id]);
+  }, [id, setState]);
 
   const cardList = [];
 

@@ -17,7 +17,7 @@ const List = ({ list }) => {
               key={index}
               className='py-3 sm:py-4 cursor-pointer hover:bg-gray-100 px-8'
             >
-              <Link href={`/translations/${index + 1}`} passHref>
+              <Link href={`/${index + 1}`} passHref>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-1 min-w-0'>
                     <p className='text-2xl font-medium text-gray-900 truncate dark:text-white'>
