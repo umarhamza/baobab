@@ -26,7 +26,7 @@ const Add = () => {
   useEffect(() => {
     getData().then((languageArray) => {
       if (languageArray) {
-        setLocalData(JSON.parse(localStorage.getItem('baobabData')));
+        setLocalData(JSON.parse(sessionStorage.getItem('baobabData')));
         setState((prevState) => ({
           ...prevState,
           alert: null,
@@ -50,7 +50,7 @@ const Add = () => {
 
     const newLanguages = [...localData, [english, wolof, arabic]];
 
-    localStorage.setItem('baobabData', JSON.stringify(newLanguages));
+    sessionStorage.setItem('baobabData', JSON.stringify(newLanguages));
 
     axios.post('/api/postGoogleAPI', newLanguages).then(() => {
       setFormData(initialFormData);

@@ -20,7 +20,7 @@ const Layout = ({ children, seoTitle, pageTitle, showBackButton }) => {
       >
         <div
           style={{ height: '100vh' }}
-          className='p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700'
+          className='p-4 w-full relative max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700'
         >
           <Title title={pageTitle} showBack={showBackButton} />
           {alertMsg && <Alert type={alertType} msg={alertMsg} />}

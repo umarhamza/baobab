@@ -2,7 +2,7 @@ import axios from 'axios';
 import { mapTranslations } from './helpers';
 
 const getData = async () => {
-  const baobabData = JSON.parse(localStorage.getItem('baobabData'));
+  const baobabData = JSON.parse(sessionStorage.getItem('baobabData'));
 
   if (baobabData) {
     return mapTranslations(baobabData);
@@ -13,7 +13,7 @@ const getData = async () => {
       if (res.status === 200) console.log(res.status);
 
       const data = res.data.data;
-      localStorage.setItem('baobabData', JSON.stringify(data));
+      sessionStorage.setItem('baobabData', JSON.stringify(data));
 
       return mapTranslations(data);
     } catch (error) {
