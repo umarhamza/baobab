@@ -11,3 +11,9 @@ npm run dev
 # or
 yarn dev
 ```
+
+## Preview
+
+[Click here to see a preview of the web app](https://baobab.vercel.app/)
+
+![Screenshow Preview](https://github.com/umarhamza/baobab/screenshot.png)
