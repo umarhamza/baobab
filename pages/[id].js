@@ -41,8 +41,10 @@ export default function Translations() {
 
   language &&
     Object.keys(language).forEach(function (lang) {
-      const translation = language[lang];
-      cardList.push(<Card key={uuid()} card={translation} prefix={lang} />);
+      if (lang !== 'id') {
+        const translation = language[lang];
+        cardList.push(<Card key={uuid()} card={translation} prefix={lang} />);
+      }
     });
 
   return (
